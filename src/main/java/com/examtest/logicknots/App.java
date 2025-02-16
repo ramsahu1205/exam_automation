@@ -19,8 +19,8 @@ public class App {
      System.setProperty("webdriver.chrome.driver","C:\\chorme_driver\\chromedriver.exe");  
      WebDriver driver=new ChromeDriver();
     	try {
-    		//canId=args[0]; //"CAN35139260";
-    		canId="CAN35139260";
+    		canId=args[0]; //"CAN35139260";
+    		//canId="CAN35139260";
     	    QuestionBank bank=new QuestionBank();	
 		  
 		 driver.navigate().to("https://skillassessment.thinkexam.com");

@@ -10,17 +10,19 @@ public class MercerMettl {
 
 	public static void main(String[] args) {
 		
-		Logger log = new Logger("C:\\exam_logs\\ginger");
-		String canId= null;;
+		Logger log = new Logger("C:\\exam_logs\\mercer_mettl");
+		String canId= args[0];;
+		String url=args[1];
+		System.out.println(url);
 		System.setProperty("javax.net.ssl.trustStore", "trust-store.jks");
 		  System.setProperty("javax.net.ssl.trustStorePassword", "TrustStore");
      System.setProperty("webdriver.chrome.driver","C:\\chorme_driver\\chromedriver.exe");  
      WebDriver driver=new ChromeDriver();
     	try {
-    		canId="CAN35139264";
+    		//canId="CAN35139264";
     	    QuestionBank bank=new QuestionBank();	
-		  
-		 driver.navigate().to("https://tests.mettl.com/test-window-pi?key=7zvAXbqZgBq1U4qn1fPWJbBJDMGPtUY8t16qNl%2FYJvn%2BEsQBQeyLQbdWht3oqoiZ");
+		  driver.navigate().to(url);
+		// driver.navigate().to("https://tests.mettl.com/test-window-pi?key=7zvAXbqZgBq1U4qn1fPWJbBJDMGPtUY8t16qNl%2FYJvn%2BEsQBQeyLQbdWht3oqoiZ");
 	     Thread.sleep(5000);//emailId
 	     driver.manage().window().maximize();
 	     Thread.sleep(2000);//prcd-btn
@@ -31,7 +33,7 @@ public class MercerMettl {
          process1.click();
 	     Thread.sleep(2000);////*[@id="root"]/div/div[2]/div/div[2]/div[2]/button
          WebElement emailid= driver.findElement(By.id("formBasicEmail"));
-         emailid.sendKeys("2940379_can_35141883@mettl.com");
+         emailid.sendKeys(canId);
 	     Thread.sleep(2000);////*[@id="crfForm"]/div[2]/div/label/p
 	     
 		 WebElement process2= driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div[2]/button"));
@@ -68,7 +70,9 @@ public class MercerMettl {
 	     WebElement firstQsn= driver.findElement(By.id("quesItem_0"));
 	     firstQsn.click();
 	     Thread.sleep(5000);///start-test-btn
-	     
+	      int count=0;
+	     int maxC=Util.randomBetween(5, 10);
+		 log.addMsg("Practical wrong Ans Force==>"+maxC);
 	     for(int i=0;i<40;i++) {
 	    	 
 			 WebElement question= driver.findElement(By.xpath("//div[@class=\"question-area\"]/div[2]"));
@@ -82,7 +86,13 @@ public class MercerMettl {
 			 WebElement opt4= driver.findElement(By.xpath("//*[contains(@id,\"_answer_4\")]/div"));
 	         int correctAns= bank.getCorrectAnswer(question.getText(), opt1.getText(), opt2.getText(), opt3.getText(), opt4.getText());
 			 System.out.println("Question==>"+question.getText());
-	         System.out.println("CorrectAns==>"+correctAns);
+			 System.out.println("CorrectAns==>"+correctAns);
+			if(count<maxC && Util.random(2)==0) {
+				 correctAns = Util.random(3);
+				 count++;
+				 System.out.println("Updated CorrectAns==>"+correctAns);
+				 log.addMsg("Force wrong Ans  no ==>"+(i+1));
+			 }
 			 WebElement answer= driver.findElement(By.xpath("//*[contains(@id,\"_answer_"+(correctAns+1)+"\")]/div"));
 			 answer.click();
 			 Thread.sleep(2000);//emailId
@@ -108,7 +118,13 @@ public class MercerMettl {
 	     WebElement firstQsn1= driver.findElement(By.id("quesItem_0"));
 	     firstQsn1.click();
 	     Thread.sleep(5000);///start-test-btn
-	     
+		WebElement qsnList2= driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[3]/div/div[1]/div[1]/div[2]/div/div[2]/button"));
+		 qsnList2.click();
+	     Thread.sleep(5000);///start-test-btn
+	    System.out.println("theory complted==>");
+		 count=0;
+	     maxC=Util.randomBetween(1, 5);
+		log.addMsg("Practical wrong Ans Force==>"+maxC);
 	     for(int i=0;i<20;i++) {
 			 WebElement question= driver.findElement(By.xpath("//div[@class=\"question-area\"]/div[2]"));
 			// Thread.sleep(5000);//emailId
@@ -116,15 +132,27 @@ public class MercerMettl {
 			 WebElement opt2= driver.findElement(By.xpath("//*[contains(@id,\"_answer_2\")]/div"));
 			 WebElement opt3= driver.findElement(By.xpath("//*[contains(@id,\"_answer_3\")]/div"));
 			 WebElement opt4= driver.findElement(By.xpath("//*[contains(@id,\"_answer_4\")]/div"));
+	
 	         int correctAns= bank.getCorrectAnswer(question.getText(), opt1.getText(), opt2.getText(), opt3.getText(), opt4.getText());
 			 System.out.println("Question==>"+question.getText());
+			 System.out.println("Option 1==>"+opt1.getText());
+			 System.out.println("Option 2==>"+opt2.getText());
+			 System.out.println("Option 3==>"+opt3.getText());
+			 System.out.println("Option 4==>"+opt4.getText());
+
 	         System.out.println("CorrectAns==>"+correctAns);
+			if(count<maxC && Util.random(2)==0) {
+				 correctAns = Util.random(3);
+				 count++;
+				log.addMsg("Force wrong Ans  no ==>"+(i+1));
+			 }
 			 WebElement answer= driver.findElement(By.xpath("//*[contains(@id,\"_answer_"+(correctAns+1)+"\")]/div"));
 			 answer.click();
 			 Thread.sleep(2000);//emailId
-				log.saveAns(question.getText(), correctAns);
+			 //System.out.println("Selected Ans==>");
+			 log.saveAns(question.getText(), correctAns);
 			if(i==0) {
-					WebElement nextQuestion= driver.findElement(By.xpath("//*[@class=\"btn-group\"]/a[1]"));
+					 WebElement nextQuestion= driver.findElement(By.xpath("//*[@class=\"btn-group\"]/a[1]"));
 					 nextQuestion.click();
 					 Thread.sleep(2000);
 			}
@@ -143,14 +171,14 @@ public class MercerMettl {
 	     WebElement submitTestF= driver.findElement(By.xpath("/html/body/div[12]/div/div/div/div/div[3]/div/div/div/button[1]"));
 	     submitTestF.click();  
 	     Thread.sleep(5000);// /html/body/div[12]/div/div/div/div/div[3]/div/div/div/button[1]
-
-         //driver.quit(); dropdownSection
+            log.saveTest(canId, "success");
+         driver.quit(); //dropdownSection
     	}
     	catch(Exception ex) {
     		ex.getStackTrace();
     		System.out.println(ex.getMessage()); //submittest
             log.addMsg(ex.getMessage());
-           // log.saveTest(canId, "error");
+            log.saveTest(canId, "error");
            // driver.quit();
     	}
     	

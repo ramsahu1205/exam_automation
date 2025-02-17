@@ -28,11 +28,11 @@ public class QuestionBank {
 	    	qd.setCorrectAnswer(list[i].get("Answers "));
 	    	qd.setKeyword(list[i].get("Keywords"));
 	    	questionList.add(qd);
-	    	System.out.println(i+" "+ qd.getQuestion());
-	    	System.out.println(qd.getOptionA());
-	    	System.out.println(qd.getOptionB());
-	    	System.out.println(qd.getOptionC());
-	    	System.out.println(qd.getOptionD());
+	    	// System.out.println(i+" "+ qd.getQuestion());
+	    	// System.out.println(qd.getOptionA());
+	    	// System.out.println(qd.getOptionB());
+	    	// System.out.println(qd.getOptionC());
+	    	// System.out.println(qd.getOptionD());
 	    }
 
     }

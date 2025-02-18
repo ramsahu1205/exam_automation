@@ -2,6 +2,7 @@ package com.examtest.logicknots;
 import java.io.InputStream;
 import java.sql.Driver;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -77,6 +78,18 @@ public class App {
 	     
 	     startTest.click();
 	     Thread.sleep(5000);//emailId
+	     try {
+	        Alert alert1 = driver.switchTo().alert();
+	        if(alert1!=null) {
+		        alert1.accept();
+	        	log.addMsg("Accespt alert");
+		        Thread.sleep(2000);
+	        }
+	     }
+	     catch(Exception ex) {
+	    	 
+	     }
+
 	     WebElement question1btn= driver.findElement(By.id("wrightImage_1"));
 	     question1btn.click();
 	     int count=0;

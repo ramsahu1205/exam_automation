@@ -28,7 +28,7 @@ function executeApp(email,url){
  }
  
  async function executeAllStudent(){
-    for(let i=300;i<loginData.length;i++){
+    for(let i=0;i<loginData.length;i++){
        await executeApp(loginData[i].email,loginData[i].url);
     }
  }

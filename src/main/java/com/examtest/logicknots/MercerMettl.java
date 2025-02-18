@@ -179,7 +179,7 @@ public class MercerMettl {
     		System.out.println(ex.getMessage()); //submittest
             log.addMsg(ex.getMessage());
             log.saveTest(canId, "error");
-           // driver.quit();
+            driver.quit();
     	}
     	
 		// TODO Auto-generated method stub

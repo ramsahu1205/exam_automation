@@ -1,12 +1,9 @@
 const fs=require("fs");
 const {executeCmd} = require("./execute_command")
 
-const csvData= fs.readFileSync("mercer_mettl.csv","utf8");
+const csvData= fs.readFileSync("mercer_mettl.json","utf8");
 
-const loginData = csvData.split("\n").map((d)=>{
-   const [email,url] = d.split(",");
-   return {email,url:url?.trim()};
-})
+const loginData = JSON.parse(csvData);
 
 //console.log(loginData);
 
@@ -28,6 +25,7 @@ function executeApp(email,url){
  }
  
  async function executeAllStudent(){
+   console.log("Total execution==>",canList.length)
     for(let i=0;i<loginData.length;i++){
        await executeApp(loginData[i].email,loginData[i].url);
     }

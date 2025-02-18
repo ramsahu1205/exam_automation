@@ -3,9 +3,7 @@ const fs=require("fs");
 
 const csvData= fs.readFileSync("think_exam.csv","utf8");
 
-const canList = csvData.split("\n").map((d)=>{
-   return d?.trim();
-})
+const canList = JSON.parse(csvData)
 
 function executeApp(can_id){
    return new Promise((resolve,reject)=>{
@@ -24,6 +22,7 @@ function executeApp(can_id){
 }
 
 async function executeAllStudent(){
+   console.log("Total execution==>",canList.length)
    for(let i=0;i<canList.length;i++){
       await executeApp(canList[i]);
    }

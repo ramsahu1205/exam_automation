@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;  
 /**
  * Hello world!
@@ -17,10 +18,13 @@ public class App {
 		System.setProperty("javax.net.ssl.trustStore", "trust-store.jks");
 		  System.setProperty("javax.net.ssl.trustStorePassword", "TrustStore");
      System.setProperty("webdriver.chrome.driver","C:\\chorme_driver\\chromedriver.exe");  
-     WebDriver driver=new ChromeDriver();
+     ChromeOptions options = new ChromeOptions();
+     // Enable headless mode by passing the argument
+     options.addArguments("--headless");
+     WebDriver driver=new ChromeDriver(options);
     	try {
     		canId=args[0]; //"CAN35139260";
-    		//canId="CAN35139260";
+    		//canId="CAN35182351";
     	    QuestionBank bank=new QuestionBank();	
 		  
 		 driver.navigate().to("https://skillassessment.thinkexam.com");
@@ -51,10 +55,11 @@ public class App {
 //			
 //		    }
 	     Thread.sleep(5000);//passwordl
+	     driver.close();
+	     Thread.sleep(5000);//passwordl
 	     Object[] windowHandles=driver.getWindowHandles().toArray();
-	     
-	     driver.switchTo().window((String)windowHandles[1]);
-	     Thread.sleep(15000);//passwordl
+	     driver.switchTo().window((String)windowHandles[0]);
+	     Thread.sleep(10000);//passwordl
 	        String title=driver.getTitle();
 
 	        System.out.println("Title==>"+title);  

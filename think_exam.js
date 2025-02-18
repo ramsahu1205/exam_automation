@@ -1,20 +1,11 @@
 const {executeCmd} = require("./execute_command")
-let canList=["CAN35139189 ",
-"CAN35139183",
-"CAN35139146",
-"CAN35139145",
-"CAN35139140",
-"CAN35139138",
-"CAN35139136",
-"CAN35139135",
-"CAN35139130",
-"CAN35139127",
-"CAN35139118",
-"CAN35139117",
-"CAN35139113",
-"CAN35139110",
-"CAN35139104",
-"CAN35139103"]
+const fs=require("fs");
+
+const csvData= fs.readFileSync("think_exam.csv","utf8");
+
+const canList = csvData.split("\n").map((d)=>{
+   return d?.trim();
+})
 
 function executeApp(can_id){
    return new Promise((resolve,reject)=>{
@@ -27,7 +18,7 @@ function executeApp(can_id){
             console.log("Error==>",err)
          })
          resolve(true);
-      },25000)
+      },30000)
    })
       
 }

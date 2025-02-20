@@ -85,6 +85,12 @@ public class App {
 	        	log.addMsg("Accespt alert");
 		        Thread.sleep(2000);
 	        }
+			Alert alert2 = driver.switchTo().alert();
+	        if(alert2!=null) {
+		        alert2.accept();
+	        	log.addMsg("Accespt alert");
+		        Thread.sleep(2000);
+	        }
 	     }
 	     catch(Exception ex) {
 	    	 

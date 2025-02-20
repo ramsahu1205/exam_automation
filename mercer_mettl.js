@@ -8,7 +8,7 @@ const loginData = JSON.parse(csvData);
 //console.log(loginData);
 
 
-function executeApp(email,url){
+function executeApp(email,url,force){
     return new Promise((resolve,reject)=>{
        setTimeout(()=>{
           executeCmd(`mvn exec:java -Dexec.mainClass="com.examtest.logicknots.MercerMettl" -Dexec.args="${email} ${url}"`)
@@ -19,7 +19,7 @@ function executeApp(email,url){
              console.log("Error==>",err)
           })
           resolve(true);
-       },30000)
+       },force?(60000*5):30000)
     })
        
  }
@@ -27,7 +27,7 @@ function executeApp(email,url){
  async function executeAllStudent(){
    console.log("Total execution==>",canList.length)
     for(let i=0;i<loginData.length;i++){
-       await executeApp(loginData[i].email,loginData[i].url);
+       await executeApp(loginData[i].email,loginData[i].url,(i+1)%15==0);
     }
  }
  

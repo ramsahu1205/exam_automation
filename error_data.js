@@ -29,13 +29,13 @@ function getErrorGinger(path){
 }
 
 function getAllFileData(...files){
-    let csvData = []
+    let csvData1 = []
     files.forEach((f)=>{
         const csvData= fs.readFileSync(f,"utf8");    
         const loginData = JSON.parse(csvData);
-        csvData=[...csvData,...loginData]
+        csvData1=[...csvData1,...loginData]
     })
-    return csvData
+    return csvData1
 }
 
 

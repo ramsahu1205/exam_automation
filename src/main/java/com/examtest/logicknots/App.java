@@ -98,6 +98,7 @@ public class App {
 
 	     WebElement question1btn= driver.findElement(By.id("wrightImage_1"));
 	     question1btn.click();
+		 Thread.sleep(2000);//emailId
 	     int count=0;
 	     int maxC=Util.randomBetween(5, 15);
 	     for(int i=0;i<60;i++) {

@@ -1,9 +1,9 @@
 const fs=require("fs");
 const {executeCmd} = require("./execute_command")
+const {getErrorMattle,getAllFileData} = require("./error_data")
+const loginData= getAllFileData("mettl_exam_13.json");
 
-const csvData= fs.readFileSync("mercer_mettl.json","utf8");
-
-const loginData = JSON.parse(csvData);
+//const loginData = JSON.parse(csvData);
 
 //console.log(loginData);
 

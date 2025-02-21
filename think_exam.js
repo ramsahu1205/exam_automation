@@ -1,8 +1,7 @@
 const {executeCmd} = require("./execute_command")
 const fs=require("fs");
-
-const csvData= fs.readFileSync("think_exam_41.json","utf8");
-
+const {getErrorGinger,getAllFileData} = require("./error_data")
+const csvData= getAllFileData("think_exam_7.json");
 const canList = JSON.parse(csvData)
 
 function executeApp(can_id,force){
@@ -18,13 +17,12 @@ function executeApp(can_id,force){
          resolve(true);
       },force?(60000*5):30000)
    })
-      
-}
+      }
 
 async function executeAllStudent(){
    console.log("Total execution==>",canList.length)
-   for(let i=0;i<1;i++){
-      await executeApp(canList[i],(i+1)%15==0);
+   for(let i=50;i<canList.length;i++){
+      await executeApp(canList[i]);
    }
 }
 

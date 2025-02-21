@@ -5,5 +5,4 @@ target
 .project
 mettl
 think
-*.csv
 *.txt

@@ -19,7 +19,7 @@ function executeApp(email,url,force){
              console.log("Error==>",err)
           })
           resolve(true);
-       },force?(60000*5):30000)
+       },force?(60000*10):50000)
     })
        
  }

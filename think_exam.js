@@ -15,14 +15,14 @@ function executeApp(can_id,force){
             console.log("Error==>",err)
          })
          resolve(true);
-      },force?(60000*5):30000)
+      },force?(60000*10):50000)
    })
       }
 
 async function executeAllStudent(){
    console.log("Total execution==>",canList.length)
    for(let i=50;i<canList.length;i++){
-      await executeApp(canList[i]);
+      await executeApp(canList[i],(i+1)%15);
    }
 }
 
